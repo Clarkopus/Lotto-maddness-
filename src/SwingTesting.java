@@ -4,6 +4,8 @@ import java.awt.*;
 import javax.swing.*;
 public class SwingTesting extends JFrame {
 	
+	Events lotto = new Events(this);
+	
 	//Setup row 1
 	JPanel row1 = new JPanel();
 	ButtonGroup option = new ButtonGroup();
@@ -49,6 +51,9 @@ public class SwingTesting extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridLayout layout = new GridLayout(5,1,10,10);
 		setLayout(layout);
+		
+		//init event listeners
+		reset.addActionListener(lotto);
 		
 		//FlowLayout used for row 1
 		FlowLayout layout1 = new FlowLayout(FlowLayout.CENTER,10,10);
