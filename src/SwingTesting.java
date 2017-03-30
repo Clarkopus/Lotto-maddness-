@@ -54,6 +54,7 @@ public class SwingTesting extends JFrame {
 		
 		//init event listeners
 		reset.addActionListener(lotto);
+		play.addActionListener(lotto);
 		
 		//FlowLayout used for row 1
 		FlowLayout layout1 = new FlowLayout(FlowLayout.CENTER,10,10);
