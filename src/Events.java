@@ -11,6 +11,7 @@ public class Events implements ActionListener,
 	// Create instance of the application main window
 		SwingTesting gui;
 		Thread playing;
+		int drawCount = 0;
 		
 		public Events(SwingTesting in){
 			gui = in;
@@ -60,7 +61,11 @@ public class Events implements ActionListener,
 				gui.winners[x].setText(Integer.toString(rng.nextInt((max - min) + 1)+ min));
 				lastPick = pick;
 			}
+			
+			gui.drawings.setText(Integer.toString(drawCount ++));
 		}
+		
+		
 		
 		/* Function to check the results of the draw */
 		void checkResults(){
