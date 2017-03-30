@@ -65,11 +65,6 @@ public class Events implements ActionListener,
 		/* Function to check the results of the draw */
 		void checkResults(){
 			
-			/* TODO
-			 * - check results of each JTextField 
-			 * - Loop through winners[] and numbers[]
-			 * - check if either number equals to that field */
-			//Test for git
 		}
 
 		@Override
