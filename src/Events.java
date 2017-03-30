@@ -51,22 +51,24 @@ public class Events implements ActionListener,
 			int min = 1;
 			int max = 99;
 			int lastPick = 0;
-			
 			for(int x=0;x<gui.winners.length;x++){
 				int pick = rng.nextInt((max - min) + 1)+ min;
 				while(true){
-					
-					if(pick == lastPick){
-						
-						pick = rng.nextInt((max - min) + 1)+ min;
-					}
-					
+					if(pick == lastPick){pick = rng.nextInt((max - min) + 1)+ min;}
 					else break;
 				}
 				gui.winners[x].setText(Integer.toString(rng.nextInt((max - min) + 1)+ min));
 				lastPick = pick;
-				System.out.println(Integer.toString(pick));
 			}
+		}
+		
+		/* Function to check the results of the draw */
+		void checkResults(){
+			
+			/* TODO
+			 * - check results of each JTextField 
+			 * - Loop through winners[] and numbers[]
+			 * - check if either number equals to that field */
 		}
 
 		@Override
