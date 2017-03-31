@@ -12,6 +12,12 @@ public class Events implements ActionListener,
 		SwingTesting gui;
 		Thread playing;
 		int drawCount = 0;
+		int matches;
+		int threeOfSix;
+		int fourOfSix;
+		int fiveOfSix;
+		int sixOfSix;
+		
 		
 		public Events(SwingTesting in){
 			gui = in;
@@ -63,6 +69,7 @@ public class Events implements ActionListener,
 			}
 			
 			gui.drawings.setText(Integer.toString(drawCount ++));
+			checkResults();
 		}
 		
 		
@@ -70,8 +77,8 @@ public class Events implements ActionListener,
 		/* Function to check the results of the draw */
 		void checkResults(){
 			
-			String[] winnerNumbers = new String[5];
-			String[] personalNumbers = new String[5];
+			String[] winnerNumbers = new String[6];
+			String[] personalNumbers = new String[6];
 			
 			for(int x=0; x < 6; x++){
 				
@@ -80,13 +87,27 @@ public class Events implements ActionListener,
 			}
 			int currentField =0;
 			while(true){
-				
+				if (currentField ==6)break;
 				for(int x=0;x<5;x++){
 					
-					if(personalNumbers[currentField].equals(winnerNumbers))
+					if(personalNumbers[currentField].equals(winnerNumbers[x])){
+						matches ++;
+					}
 				}
+				currentField++;
+				
 			}
 			
+			if(matches == 3)threeOfSix++;
+			else if (matches ==4)fourOfSix++;
+			else if (matches ==5)fiveOfSix++;
+			else if (matches ==6)sixOfSix++;
+			gui.got3.setText(Integer.toString(threeOfSix));
+			gui.got4.setText(Integer.toString(fourOfSix));
+			gui.got5.setText(Integer.toString(fiveOfSix));
+			gui.got6.setText(Integer.toString(sixOfSix));
+			gui.years.setText(Integer.toString(matches));
+			matches = 0;
 			
 		}
 		
