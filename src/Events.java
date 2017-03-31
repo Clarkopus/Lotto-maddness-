@@ -70,7 +70,27 @@ public class Events implements ActionListener,
 		/* Function to check the results of the draw */
 		void checkResults(){
 			
+			String[] winnerNumbers = new String[5];
+			String[] personalNumbers = new String[5];
+			
+			for(int x=0; x < 6; x++){
+				
+				personalNumbers[x] = gui.numbers[x].getText();
+				winnerNumbers[x] = gui.winners[x].getText();
+			}
+			int currentField =0;
+			while(true){
+				
+				for(int x=0;x<5;x++){
+					
+					if(personalNumbers[currentField].equals(winnerNumbers))
+				}
+			}
+			
+			
 		}
+		
+	
 
 		@Override
 		public void run() {
