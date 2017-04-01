@@ -45,7 +45,7 @@ public class SwingTesting extends JFrame {
 	//Class constructor
 	public SwingTesting(){
 		//Generic init
-		super("Lotto sim V0.4.2");
+		super("Lotto sim V0.5.1");
 		setLookAndFeel();
 		setSize(850,400);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
