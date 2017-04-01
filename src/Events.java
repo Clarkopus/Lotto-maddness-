@@ -37,7 +37,7 @@ public class Events implements ActionListener,
 			//If it comes badk as play run the play function
 			else if(command.equals("play")){
 				
-				startLotto();
+				startLottoImproved();
 			}
 		}
 		/* Function to reset all JTextField fields to a blank empty String */
@@ -48,11 +48,10 @@ public class Events implements ActionListener,
 				gui.winners[x].setText("");
 			}
 		}
-		/* Function to start the initial lotto draw.
-		 * Works by looping through each JTextField and giving that field a
-		 * random number. If that number matches another field's value then
-		 * it is assigned a new random value. */
+		
+		//DEPRECEATED FUNCTION.
 		void startLotto(){
+			
 			
 			Random rng = new Random();
 			int min = 1;
@@ -64,12 +63,44 @@ public class Events implements ActionListener,
 					if(pick == lastPick){pick = rng.nextInt((max - min) + 1)+ min;}
 					else break;
 				}
-				gui.winners[x].setText(Integer.toString(rng.nextInt((max - min) + 1)+ min));
+				gui.winners[x].setText(Integer.toString(pick));
 				lastPick = pick;
 			}
 			
 			gui.drawings.setText(Integer.toString(drawCount ++));
 			checkResults();
+		}
+		
+		/* Improved version of startLotto
+		 * Instead of checking if the last number was the same
+		 * it checks all the fields to see if any are the same
+		 * if it comes back as an identical value a new value
+		 * is generated. */
+		void startLottoImproved(){
+			
+			Random rng = new Random();
+			int min = 1;
+			int max = 99;
+			int i =0;
+			int[] currentDraws = new int[6];
+			
+			for(int x=0; x<gui.winners.length;x++){
+				
+				int pick = rng.nextInt((max - min) + 1) + min;
+				while(true){
+					if(pick==currentDraws[i]){
+						pick = rng.nextInt((max - min) +1) + min;
+					}
+					i++;
+					if(i ==6){
+						i=0;
+						break;
+					}
+				}
+				
+				gui.winners[x].setText(Integer.toString(pick));
+				checkResults();
+			}
 		}
 		
 		
