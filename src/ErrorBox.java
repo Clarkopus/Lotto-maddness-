@@ -17,8 +17,8 @@ public class ErrorBox extends JFrame{
 		
 		super("Error!");
 		setLookAndFeel();
-		setSize(300,300);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(400,300);
+		setDefaultCloseOperation(ErrorBox.DISPOSE_ON_CLOSE);
 		GridLayout layout = new GridLayout(2,1,10,10);
 		FlowLayout layout2 = new FlowLayout(FlowLayout.CENTER,10,10);
 		FlowLayout layout3 = new FlowLayout(FlowLayout.CENTER,10,10);
@@ -36,7 +36,7 @@ public class ErrorBox extends JFrame{
 		pane.setLayout(layout2);
 		pane.setLayout(layout3);
 		
-		setVisible(true);
+		setVisible(false);
 	}
 	
 	private void setLookAndFeel(){

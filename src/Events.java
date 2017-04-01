@@ -11,6 +11,7 @@ public class Events implements ActionListener,
 	// Create instance of the application main window
 		SwingTesting gui;
 		Thread playing;
+		ErrorBox error = new ErrorBox();
 		int drawCount = 0;
 		int matches;
 		int threeOfSix;
@@ -34,15 +35,16 @@ public class Events implements ActionListener,
 				
 				resetFields();
 			}
-			//If it comes badk as play run the play function
+			//If it comes back as play run the play function
 			else if(command.equals("play")){
 				
 				try {
 					startLotto();
-				} catch (emptyFieldException e) {
+				} catch (emptyFieldException | IdenticalNumberFieldsException e) {
 					// TODO Auto-generated catch block
 					ErrorBox error = new ErrorBox();
 					error.errorText.setText(e.toString());
+					error.setVisible(true);
 					
 				}
 			}
@@ -64,19 +66,17 @@ public class Events implements ActionListener,
 		 * is generated. 
 		 * Also supports exception if the fields aren't filled
 		 * in.*/
-		void startLotto()throws emptyFieldException{
+		void startLotto() throws IdenticalNumberFieldsException, emptyFieldException{
 			
 			Random rng = new Random();
 			int min = 1;
 			int max = 99;
 			int i =0;
+			String[] currentFields = new String[5];
 			int[] currentDraws = new int[6];
-			for(int x=0; x<6;x++){
-				if(gui.winners[x].getText().equals("")){
-					throw new emptyFieldException("Empty field Dectected!!");
-					
-				}
-			}
+			
+			currentFields =checkFields(currentFields);
+				
 			for(int x=0; x<gui.winners.length;x++){
 				
 				int pick = rng.nextInt((max - min) + 1) + min;
@@ -143,6 +143,31 @@ public class Events implements ActionListener,
 			// TODO Auto-generated method stub
 			
 		}
+		
+		String[] checkFields(String[] currentFields) throws IdenticalNumberFieldsException, emptyFieldException {
+			for(int x=0; x<6;x++){
+				if(gui.numbers[x].getText().equals("")){
+					throw new emptyFieldException("Empty field Dectected!!");	
+				}
+			}
+			int i =0;
+			for(int y=0; y<currentFields.length;y++){
+				currentFields[y] = gui.numbers[y].getText();
+			}
+			for(int x=0; x<gui.winners.length;x++){
+				while(true){
+					if(currentFields[x].equals(currentFields[x])){
+						throw new IdenticalNumberFieldsException("Identical number fields found!");
+					}
+					i++;
+					if(i ==6){
+						i=0;
+						break;
+					}
+				}
+			
+		}
+			return currentFields;
 	}
 
 class emptyFieldException extends Exception{
@@ -152,4 +177,12 @@ class emptyFieldException extends Exception{
 	}
 	
 	
+}
+
+class IdenticalNumberFieldsException extends Exception{
+	
+	IdenticalNumberFieldsException(String s){
+		super(s);
+	}
+}
 }
