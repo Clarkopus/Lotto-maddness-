@@ -4,8 +4,6 @@ import java.awt.*;
 import javax.swing.*;
 public class SwingTesting extends JFrame {
 	
-	//Test to git
-	
 	Events lotto = new Events(this);
 	
 	//Setup row 1
@@ -41,15 +39,15 @@ public class SwingTesting extends JFrame {
 	JTextField got6 = new JTextField();
 	JLabel drawingsLabel = new JLabel("Drawings",JLabel.RIGHT);
 	JTextField drawings = new JTextField();
-	JLabel yearsLabel = new JLabel("Years: ",JLabel.RIGHT);
-	JTextField years = new JTextField();
+	JLabel matchesLabel = new JLabel("Current matches: ",JLabel.RIGHT);
+	JTextField matches = new JTextField();
 	
 	//Class constructor
 	public SwingTesting(){
 		//Generic init
 		super("Lotto sim V0.4.2");
 		setLookAndFeel();
-		setSize(500,400);
+		setSize(850,400);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridLayout layout = new GridLayout(5,1,10,10);
 		setLayout(layout);
@@ -119,9 +117,9 @@ public class SwingTesting extends JFrame {
 		row4.add(drawingsLabel);
 		row4.add(drawings);
 		drawings.setEditable(false);
-		row4.add(yearsLabel);
-		row4.add(years);
-		years.setEditable(false);
+		row4.add(matchesLabel);
+		row4.add(matches);
+		matches.setEditable(false);
 		add(row4);
 		
 		//Need to set the frame to be visible

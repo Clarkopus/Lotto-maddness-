@@ -37,7 +37,14 @@ public class Events implements ActionListener,
 			//If it comes badk as play run the play function
 			else if(command.equals("play")){
 				
-				startLottoImproved();
+				try {
+					startLotto();
+				} catch (emptyFieldException e) {
+					// TODO Auto-generated catch block
+					ErrorBox error = new ErrorBox();
+					error.errorText.setText(e.toString());
+					
+				}
 			}
 		}
 		/* Function to reset all JTextField fields to a blank empty String */
@@ -49,41 +56,27 @@ public class Events implements ActionListener,
 			}
 		}
 		
-		//DEPRECEATED FUNCTION.
-		void startLotto(){
-			
-			
-			Random rng = new Random();
-			int min = 1;
-			int max = 99;
-			int lastPick = 0;
-			for(int x=0;x<gui.winners.length;x++){
-				int pick = rng.nextInt((max - min) + 1)+ min;
-				while(true){
-					if(pick == lastPick){pick = rng.nextInt((max - min) + 1)+ min;}
-					else break;
-				}
-				gui.winners[x].setText(Integer.toString(pick));
-				lastPick = pick;
-			}
-			
-			gui.drawings.setText(Integer.toString(drawCount ++));
-			checkResults();
-		}
 		
 		/* Improved version of startLotto
 		 * Instead of checking if the last number was the same
 		 * it checks all the fields to see if any are the same
 		 * if it comes back as an identical value a new value
-		 * is generated. */
-		void startLottoImproved(){
+		 * is generated. 
+		 * Also supports exception if the fields aren't filled
+		 * in.*/
+		void startLotto()throws emptyFieldException{
 			
 			Random rng = new Random();
 			int min = 1;
 			int max = 99;
 			int i =0;
 			int[] currentDraws = new int[6];
-			
+			for(int x=0; x<6;x++){
+				if(gui.winners[x].getText().equals("")){
+					throw new emptyFieldException("Empty field Dectected!!");
+					
+				}
+			}
 			for(int x=0; x<gui.winners.length;x++){
 				
 				int pick = rng.nextInt((max - min) + 1) + min;
@@ -111,6 +104,7 @@ public class Events implements ActionListener,
 			String[] winnerNumbers = new String[6];
 			String[] personalNumbers = new String[6];
 			
+			
 			for(int x=0; x < 6; x++){
 				
 				personalNumbers[x] = gui.numbers[x].getText();
@@ -137,7 +131,7 @@ public class Events implements ActionListener,
 			gui.got4.setText(Integer.toString(fourOfSix));
 			gui.got5.setText(Integer.toString(fiveOfSix));
 			gui.got6.setText(Integer.toString(sixOfSix));
-			gui.years.setText(Integer.toString(matches));
+			gui.matches.setText(Integer.toString(matches));
 			matches = 0;
 			
 		}
@@ -150,3 +144,12 @@ public class Events implements ActionListener,
 			
 		}
 	}
+
+class emptyFieldException extends Exception{
+	
+	emptyFieldException(String s){
+		super(s);
+	}
+	
+	
+}
