@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.Random;
 // Implement the action listener interface
-public class Events implements ActionListener, 
+public class Events implements ActionListener, ItemListener ,
 
 	Runnable{
 	// Create instance of the application main window
@@ -30,6 +30,7 @@ public class Events implements ActionListener,
 			
 			// Get the action listener String
 			String command = event.getActionCommand();
+			
 			//If it comes back as reset then run the reset fields function
 			if(command.equals("reset")){
 				
@@ -49,6 +50,7 @@ public class Events implements ActionListener,
 				}
 			}
 		}
+		
 		/* Function to reset all JTextField fields to a blank empty String */
 		void resetFields(){
 			
@@ -145,6 +147,7 @@ public class Events implements ActionListener,
 		}
 		
 		String[] checkFields(String[] currentFields) throws IdenticalNumberFieldsException, emptyFieldException {
+			
 			for(int x=0; x<6;x++){
 				if(gui.numbers[x].getText().equals("")){
 					throw new emptyFieldException("Empty field Dectected!!");	
@@ -185,4 +188,44 @@ class IdenticalNumberFieldsException extends Exception{
 		super(s);
 	}
 }
+
+@Override
+public void itemStateChanged(ItemEvent e) {
+	int status = e.getStateChange();
+	Random rng = new Random();
+	int min = 1;
+	int max = 99;
+	int i =0;
+	String[] currentFields = new String[5];
+	int[] currentDraws = new int[6];
+	
+	if(status == ItemEvent.SELECTED){
+		for(int x=0; x<6;x++){
+			gui.numbers[x].setEnabled(false);
+		}
+	}
+		else if(status == ItemEvent.DESELECTED){
+			for(int x=0; x<6;x++){
+				gui.numbers[x].setEnabled(true);
+			}
+		}
+	for(int x=0; x<gui.numbers.length;x++){
+		
+		int pick = rng.nextInt((max - min) + 1) + min;
+		while(true){
+			if(pick==currentDraws[i]){
+				pick = rng.nextInt((max - min) +1) + min;
+			}
+			i++;
+			if(i ==6){
+				i=0;
+				break;
+			}
+		}
+		
+	gui.numbers[x].setText(Integer.toString(pick));
+}
+	
+	}
+
 }

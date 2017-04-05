@@ -1,8 +1,5 @@
-/Events.class
-/SwingTesting.class
-/emptyFieldException.class
 /ErrorBox.class
-/ErrorBox$1.class
 /Events$IdenticalNumberFieldsException.class
 /Events$emptyFieldException.class
-/IdenticalNumberFieldsException.class
+/Events.class
+/SwingTesting.class
